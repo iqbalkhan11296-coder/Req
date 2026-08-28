@@ -1,434 +1,505 @@
-// ========================================
-// PRIVATE CHAT
-// ========================================
+/* ========================================
+   RESET
+======================================== */
 
-let currentUser = localStorage.getItem("chatUser");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-const loginScreen = document.getElementById("loginScreen");
-const chatApp = document.getElementById("chatApp");
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
 
-const nameInput = document.getElementById("nameInput");
-const loginBtn = document.getElementById("loginBtn");
-
-const logoutBtn = document.getElementById("logoutBtn");
-
-const messagesDiv = document.getElementById("messages");
-const messageForm = document.getElementById("messageForm");
-const messageInput = document.getElementById("messageInput");
-const sendBtn = document.getElementById("sendBtn");
-
-
-// ========================================
-// SHOW CHAT
-// ========================================
-
-function showChat() {
-
-    loginScreen.classList.add("hidden");
-    chatApp.classList.remove("hidden");
-
-    loadMessages();
-
-    messageInput.focus();
+body {
+    font-family: Arial, sans-serif;
+    background: #f4eef0;
+    color: #333;
+    overflow: hidden;
 }
 
 
-// ========================================
-// SHOW LOGIN
-// ========================================
+/* ========================================
+   LOGIN SCREEN
+======================================== */
 
-function showLogin() {
+.login-screen {
+    position: fixed;
+    inset: 0;
 
-    chatApp.classList.add("hidden");
-    loginScreen.classList.remove("hidden");
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    nameInput.value = "";
-}
+    padding: 20px;
 
-
-// ========================================
-// LOGIN
-// ========================================
-
-loginBtn.addEventListener("click", () => {
-
-    const name = nameInput.value.trim();
-
-    if (!name) {
-
-        alert("Please enter your name ❤️");
-
-        return;
-    }
-
-    currentUser = name;
-
-    localStorage.setItem(
-        "chatUser",
-        currentUser
+    background: linear-gradient(
+        135deg,
+        #541027,
+        #8a2948
     );
 
-    showChat();
-});
+    z-index: 100;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 380px;
+
+    background: #ffffff;
+
+    padding: 40px 30px;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.heart {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.login-box h1 {
+    color: #68152f;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.login-box p {
+    color: #888;
+    margin-bottom: 25px;
+}
+
+.login-box input {
+    width: 100%;
+    height: 50px;
+
+    padding: 0 15px;
+
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    outline: none;
+
+    font-size: 16px;
+
+    margin-bottom: 12px;
+}
+
+.login-box input:focus {
+    border-color: #711832;
+}
+
+.login-box button {
+    width: 100%;
+    height: 50px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #711832;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
 
 
-// ========================================
-// ENTER KEY LOGIN
-// ========================================
+/* ========================================
+   CHAT APP
+======================================== */
 
-nameInput.addEventListener(
-    "keydown",
-    (event) => {
+.chat-app {
+    position: fixed;
 
-        if (event.key === "Enter") {
+    inset: 0;
 
-            loginBtn.click();
+    width: 100%;
+    height: 100dvh;
 
-        }
+    max-width: 700px;
 
+    margin: 0 auto;
+
+    background: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.chat-header {
+    flex: 0 0 70px;
+
+    width: 100%;
+
+    background: #711832;
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 15px;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+.profile {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    min-width: 0;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+
+    flex-shrink: 0;
+
+    background: white;
+
+    color: #711832;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+.profile h2 {
+    font-size: 18px;
+
+    line-height: 1.2;
+}
+
+#onlineStatus {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    opacity: 0.8;
+}
+
+.logout-btn {
+    flex-shrink: 0;
+
+    border: none;
+
+    background: rgba(255, 255, 255, 0.16);
+
+    color: white;
+
+    padding: 8px 11px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+
+/* ========================================
+   MESSAGE AREA
+======================================== */
+
+.messages {
+    flex: 1 1 auto;
+
+    width: 100%;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    padding: 18px 14px 15px;
+
+    background: #faf7f8;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* ========================================
+   WELCOME
+======================================== */
+
+.welcome-message {
+    width: 100%;
+
+    margin: auto;
+
+    text-align: center;
+
+    color: #aaa;
+
+    padding: 30px;
+}
+
+.welcome-message div {
+    font-size: 38px;
+
+    margin-bottom: 8px;
+}
+
+.welcome-message p {
+    font-size: 14px;
+}
+
+
+/* ========================================
+   MESSAGE
+======================================== */
+
+.message {
+    width: 100%;
+
+    display: flex;
+
+    margin-bottom: 9px;
+}
+
+.message.mine {
+    justify-content: flex-end;
+}
+
+.message-content {
+    max-width: min(75%, 480px);
+
+    padding: 9px 13px;
+
+    background: #eeeeee;
+
+    color: #333;
+
+    border-radius: 17px;
+
+    word-break: break-word;
+
+    overflow-wrap: anywhere;
+}
+
+.message.mine .message-content {
+    background: #711832;
+
+    color: white;
+
+    border-bottom-right-radius: 5px;
+}
+
+.message:not(.mine) .message-content {
+    border-bottom-left-radius: 5px;
+}
+
+.sender-name {
+    font-size: 10px;
+
+    font-weight: bold;
+
+    margin-bottom: 3px;
+
+    opacity: 0.65;
+}
+
+.message-text {
+    font-size: 15px;
+
+    line-height: 1.4;
+
+    white-space: pre-wrap;
+}
+
+.message-time {
+    font-size: 9px;
+
+    opacity: 0.6;
+
+    margin-top: 4px;
+
+    text-align: right;
+}
+
+
+/* ========================================
+   INPUT AREA
+======================================== */
+
+.message-form {
+    flex: 0 0 auto;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 12px;
+
+    background: white;
+
+    border-top: 1px solid #eeeeee;
+
+    padding-bottom:
+        calc(10px + env(safe-area-inset-bottom));
+}
+
+.message-form input {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 46px;
+
+    padding: 0 16px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 24px;
+
+    outline: none;
+
+    font-size: 15px;
+
+    background: #fafafa;
+}
+
+.message-form input:focus {
+    border-color: #711832;
+
+    background: white;
+}
+
+.message-form button {
+    flex: 0 0 46px;
+
+    width: 46px;
+    height: 46px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #711832;
+
+    color: white;
+
+    font-size: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.message-form button:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   SCROLLBAR
+======================================== */
+
+.messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background: #d0c4c8;
+
+    border-radius: 10px;
+}
+
+
+/* ========================================
+   HIDDEN
+======================================== */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    .chat-header {
+        flex-basis: 64px;
+
+        padding: 8px 12px;
     }
-);
 
+    .avatar {
+        width: 40px;
+        height: 40px;
 
-// ========================================
-// LOGOUT
-// ========================================
-
-logoutBtn.addEventListener("click", () => {
-
-    localStorage.removeItem("chatUser");
-
-    currentUser = null;
-
-    showLogin();
-
-});
-
-
-// ========================================
-// LOAD MESSAGES
-// ========================================
-
-async function loadMessages() {
-
-    const {
-        data,
-        error
-    } = await db
-
-        .from("private_chat_messages")
-
-        .select("*")
-
-        .order(
-            "created_at",
-            {
-                ascending: true
-            }
-        );
-
-
-    if (error) {
-
-        console.error(
-            "Error loading messages:",
-            error
-        );
-
-        messagesDiv.innerHTML = `
-            <div class="welcome-message">
-                <div>⚠️</div>
-                <p>Unable to load messages.</p>
-            </div>
-        `;
-
-        return;
+        font-size: 19px;
     }
 
-
-    messagesDiv.innerHTML = "";
-
-
-    if (!data || data.length === 0) {
-
-        showWelcomeMessage();
-
-        return;
+    .profile h2 {
+        font-size: 16px;
     }
 
+    .logout-btn {
+        font-size: 12px;
 
-    data.forEach(
-        message => {
-
-            displayMessage(message);
-
-        }
-    );
-
-
-    scrollToBottom();
-}
-
-
-// ========================================
-// WELCOME MESSAGE
-// ========================================
-
-function showWelcomeMessage() {
-
-    messagesDiv.innerHTML = `
-        <div class="welcome-message">
-            <div>❤️</div>
-            <p>Start our conversation...</p>
-        </div>
-    `;
-
-}
-
-
-// ========================================
-// DISPLAY MESSAGE
-// ========================================
-
-function displayMessage(message) {
-
-    const isMine =
-        message.sender === currentUser;
-
-
-    const messageDiv =
-        document.createElement("div");
-
-    messageDiv.className =
-        "message " +
-        (isMine ? "mine" : "");
-
-
-    const content =
-        document.createElement("div");
-
-    content.className =
-        "message-content";
-
-
-    const sender =
-        document.createElement("div");
-
-    sender.className =
-        "sender-name";
-
-    sender.textContent =
-        isMine
-            ? "You"
-            : message.sender;
-
-
-    const text =
-        document.createElement("div");
-
-    text.className =
-        "message-text";
-
-    text.textContent =
-        message.message;
-
-
-    const time =
-        document.createElement("div");
-
-    time.className =
-        "message-time";
-
-    time.textContent =
-        formatTime(
-            message.created_at
-        );
-
-
-    content.appendChild(sender);
-
-    content.appendChild(text);
-
-    content.appendChild(time);
-
-    messageDiv.appendChild(content);
-
-    messagesDiv.appendChild(messageDiv);
-}
-
-
-// ========================================
-// SEND MESSAGE
-// ========================================
-
-messageForm.addEventListener(
-    "submit",
-    async (event) => {
-
-        event.preventDefault();
-
-
-        const text =
-            messageInput.value.trim();
-
-
-        if (!text) {
-
-            return;
-
-        }
-
-
-        if (!currentUser) {
-
-            alert(
-                "Please login first."
-            );
-
-            return;
-        }
-
-
-        // Disable send button
-
-        sendBtn.disabled = true;
-
-
-        const {
-            error
-        } = await db
-
-            .from(
-                "private_chat_messages"
-            )
-
-            .insert([
-                {
-                    sender: currentUser,
-                    message: text
-                }
-            ]);
-
-
-        if (error) {
-
-            console.error(
-                "Error sending message:",
-                error
-            );
-
-            alert(
-                "Message could not be sent.\n\n" +
-                error.message
-            );
-
-        } else {
-
-            messageInput.value = "";
-
-        }
-
-
-        sendBtn.disabled = false;
-
-        messageInput.focus();
-
+        padding: 7px 9px;
     }
-);
 
+    .messages {
+        padding: 14px 10px;
+    }
 
-// ========================================
-// REALTIME CHAT
-// ========================================
+    .message-content {
+        max-width: 82%;
 
-db.channel("private-chat-room")
+        padding: 9px 12px;
+    }
 
-    .on(
-        "postgres_changes",
-        {
-            event: "INSERT",
-            schema: "public",
-            table: "private_chat_messages"
-        },
+    .message-text {
+        font-size: 14px;
+    }
 
-        (payload) => {
-
-            // Remove welcome message
-
-            const welcome =
-                messagesDiv.querySelector(
-                    ".welcome-message"
-                );
-
-
-            if (welcome) {
-
-                welcome.remove();
-
-            }
-
-
-            displayMessage(
-                payload.new
-            );
-
-
-            scrollToBottom();
-
-        }
-    )
-
-    .subscribe(
-        (status) => {
-
-            console.log(
-                "Realtime status:",
-                status
-            );
-
-        }
-    );
-
-
-// ========================================
-// TIME FORMAT
-// ========================================
-
-function formatTime(dateString) {
-
-    const date =
-        new Date(dateString);
-
-
-    return date.toLocaleTimeString(
-        [],
-        {
-            hour: "2-digit",
-            minute: "2-digit"
-        }
-    );
-
-}
-
-
-// ========================================
-// SCROLL TO BOTTOM
-// ========================================
-
-function scrollToBottom() {
-
-    messagesDiv.scrollTop =
-        messagesDiv.scrollHeight;
-
-}
-
-
-// ========================================
-// AUTO LOGIN
-// ========================================
-
-if (currentUser) {
-
-    showChat();
-
+    .message-form {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
 }
