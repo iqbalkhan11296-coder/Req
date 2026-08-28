@@ -19,7 +19,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Poppins", Arial, sans-serif;
+
+    font-family: Arial, sans-serif;
     color: white;
 
     background:
@@ -28,7 +29,9 @@ body {
         linear-gradient(135deg, #ff416c, #7b2cbf);
 }
 
-/* Background glow */
+/* =========================
+   BACKGROUND GLOW
+========================= */
 
 .glow {
     position: fixed;
@@ -37,7 +40,10 @@ body {
     border-radius: 50%;
     filter: blur(80px);
     opacity: .35;
+
     animation: moveGlow 8s infinite alternate ease-in-out;
+
+    pointer-events: none;
 }
 
 .glow.one {
@@ -50,6 +56,7 @@ body {
     background: #e040fb;
     bottom: -100px;
     right: -100px;
+
     animation-delay: 2s;
 }
 
@@ -63,20 +70,31 @@ body {
     }
 }
 
-/* Floating hearts */
+
+/* =========================
+   FLOATING HEARTS
+========================= */
 
 .heart {
     position: fixed;
-    bottom: -40px;
+    bottom: -50px;
+
     pointer-events: none;
-    animation: floatUp linear forwards;
+
     opacity: 0;
+
     z-index: 1;
+
+    animation: floatUp linear forwards;
 }
 
 @keyframes floatUp {
+
     0% {
-        transform: translateY(0) rotate(0deg);
+        transform:
+            translateY(0)
+            rotate(0deg);
+
         opacity: 0;
     }
 
@@ -85,23 +103,36 @@ body {
     }
 
     100% {
-        transform: translateY(-110vh) rotate(360deg);
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+
         opacity: 0;
     }
 }
 
-/* Main card */
+
+/* =========================
+   CARD
+========================= */
 
 .card {
     position: relative;
+
     z-index: 5;
+
     width: min(90%, 440px);
+
     padding: 45px 28px;
 
     text-align: center;
 
     background: rgba(255,255,255,.15);
-    border: 1px solid rgba(255,255,255,.3);
+
+    border:
+        1px solid
+        rgba(255,255,255,.3);
+
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
 
@@ -110,25 +141,36 @@ body {
     box-shadow:
         0 30px 80px rgba(0,0,0,.25);
 
-    animation: cardIn 1.2s cubic-bezier(.2,.8,.2,1);
+    animation:
+        cardIn 1.2s
+        cubic-bezier(.2,.8,.2,1);
 }
 
 @keyframes cardIn {
+
     from {
         opacity: 0;
-        transform: translateY(50px) scale(.9);
+        transform:
+            translateY(50px)
+            scale(.9);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
-/* Heart */
+
+/* =========================
+   MAIN HEART
+========================= */
 
 .main-heart {
     font-size: 75px;
+
     margin-bottom: 15px;
 
     animation:
@@ -137,6 +179,7 @@ body {
 }
 
 @keyframes heartbeat {
+
     0%,100% {
         transform: scale(1);
     }
@@ -147,88 +190,144 @@ body {
 }
 
 @keyframes glowHeart {
+
     from {
-        filter: drop-shadow(0 0 5px rgba(255,255,255,.5));
+        filter:
+            drop-shadow(
+                0 0 5px
+                rgba(255,255,255,.5)
+            );
     }
 
     to {
-        filter: drop-shadow(0 0 25px rgba(255,255,255,.9));
+        filter:
+            drop-shadow(
+                0 0 25px
+                rgba(255,255,255,.9)
+            );
     }
 }
 
-/* Text */
+
+/* =========================
+   TEXT
+========================= */
 
 .small {
-    font-size: 15px;
+    font-size: 14px;
+
     letter-spacing: 2px;
+
     text-transform: uppercase;
+
     opacity: .85;
+
     margin-bottom: 10px;
 }
 
 h1 {
-    font-size: clamp(30px, 8vw, 44px);
+    font-size:
+        clamp(30px, 8vw, 44px);
+
     margin-bottom: 15px;
 }
 
 .message {
     font-size: 17px;
+
     line-height: 1.7;
+
     opacity: .95;
+
     margin-bottom: 30px;
 }
 
-/* Buttons */
+
+/* =========================
+   BUTTONS
+========================= */
 
 .buttons {
+
     display: flex;
+
     justify-content: center;
+
     gap: 14px;
 }
 
 button {
+
     border: none;
+
     border-radius: 50px;
 
-    padding: 15px 30px;
+    padding:
+        15px 30px;
 
     font-size: 17px;
+
     font-weight: 700;
 
     cursor: pointer;
 
     transition:
-        transform .25s,
-        box-shadow .25s,
-        background .25s;
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
 }
 
 button:hover {
-    transform: translateY(-5px) scale(1.04);
+
+    transform:
+        translateY(-5px)
+        scale(1.04);
 }
 
 button:active {
-    transform: scale(.94);
+
+    transform:
+        scale(.94);
 }
 
+
+/* YES */
+
 #yesBtn {
+
     background: white;
+
     color: #ff416c;
 
     box-shadow:
-        0 10px 30px rgba(0,0,0,.2);
+        0 10px 30px
+        rgba(0,0,0,.2);
 }
+
+
+/* NO */
 
 #noBtn {
+
     color: white;
-    background: rgba(255,255,255,.15);
-    border: 1px solid rgba(255,255,255,.5);
+
+    background:
+        rgba(255,255,255,.15);
+
+    border:
+        1px solid
+        rgba(255,255,255,.5);
 }
 
-/* Music button */
+
+/* =========================
+   MUSIC BUTTON
+========================= */
 
 .music {
+
     position: fixed;
+
     z-index: 20;
 
     top: 20px;
@@ -241,162 +340,261 @@ button:active {
 
     border-radius: 50%;
 
-    background: rgba(255,255,255,.2);
+    background:
+        rgba(255,255,255,.2);
+
     color: white;
 
-    backdrop-filter: blur(10px);
+    backdrop-filter:
+        blur(10px);
 
-    border: 1px solid rgba(255,255,255,.3);
+    border:
+        1px solid
+        rgba(255,255,255,.3);
 }
 
-/* Success */
+
+/* =========================
+   SUCCESS SCREEN
+========================= */
 
 .success {
+
     display: none;
 }
 
 .success-heart {
+
     font-size: 100px;
 
     animation:
-        heartbeat .9s infinite,
-        spinHeart 5s infinite linear;
+        successBeat 1s infinite;
 }
 
-@keyframes spinHeart {
-    0% {
-        transform: rotate(-5deg) scale(1);
+@keyframes successBeat {
+
+    0%,100% {
+        transform: scale(1);
     }
 
     50% {
-        transform: rotate(5deg) scale(1.15);
-    }
-
-    100% {
-        transform: rotate(-5deg) scale(1);
+        transform: scale(1.2);
     }
 }
 
 .success h1 {
+
     margin-top: 10px;
 }
 
 .signature {
+
     margin-top: 25px;
+
     font-size: 18px;
+
     font-style: italic;
 }
 
-/* Mobile */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:500px) {
 
     .card {
-        padding: 38px 22px;
+
+        padding:
+            38px 22px;
     }
 
     .buttons {
+
         flex-direction: column;
     }
 
     button {
+
         width: 100%;
     }
 }
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     BACKGROUND
+========================= -->
 
 <div class="glow one"></div>
 <div class="glow two"></div>
 
-<!-- Music -->
+
+<!-- =========================
+     MUSIC
+========================= -->
+
 <audio id="music" loop>
-    <source src="song.mp3" type="audio/mpeg">
+
+    <source
+        src="song.mp3"
+        type="audio/mpeg">
+
 </audio>
 
-<button class="music" id="musicBtn">🎵</button>
+
+<button
+    class="music"
+    id="musicBtn">
+
+    🎵
+
+</button>
 
 
-<!-- QUESTION -->
 
-<div class="card" id="questionCard">
+<!-- =========================
+     QUESTION CARD
+========================= -->
 
-    <div class="main-heart">❤️</div>
+<div
+    class="card"
+    id="questionCard">
+
+
+    <div class="main-heart">
+        ❤️
+    </div>
+
 
     <div class="small">
         A little question for you
     </div>
 
-    <h1>Reem...</h1>
+
+    <h1>
+        Reem...
+    </h1>
+
 
     <p class="message">
-        I know you're mad at me. 🥺<br><br>
 
-        But there's someone here who is
-        really, really sorry...
+        I know you're mad at me. 🥺
+
         <br><br>
 
-        <b>Will you forgive me?</b>
+        But there's someone here
+        who is really,
+        really sorry...
+
+        <br><br>
+
+        <b>
+            Will you forgive me?
+        </b>
+
     </p>
+
 
     <div class="buttons">
 
+
         <button id="yesBtn">
+
             Yes ❤️
+
         </button>
 
+
         <button id="noBtn">
+
             No 😤
+
         </button>
+
 
     </div>
 
 </div>
 
 
-<!-- SUCCESS -->
 
-<div class="card success" id="successCard">
+<!-- =========================
+     SUCCESS CARD
+========================= -->
+
+<div
+    class="card success"
+    id="successCard">
+
 
     <div class="success-heart">
+
         ❤️
+
     </div>
+
 
     <div class="small">
+
         I knew it...
+
     </div>
 
-    <h1>Thank you, Reem 🥹</h1>
+
+    <h1>
+
+        Thank you, Reem 🥹
+
+    </h1>
+
 
     <p class="message">
 
-        You just made Ikru very happy. ❤️
+        You just made
+        Ikru very happy. ❤️
+
         <br><br>
 
         I'm really sorry.
-        <br>
 
-        Now no more being mad at me...
-        okay? 🥺
+        <br><br>
+
+        Now no more being
+        mad at me... okay? 🥺
+
         <br><br>
 
         Come here 🫂❤️
 
     </p>
 
+
     <div class="signature">
+
         — With love, Ikru ❤️
+
     </div>
 
 </div>
 
 
+
 <script>
 
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
+/* =========================
+   GET ELEMENTS
+========================= */
+
+const yesBtn =
+    document.getElementById("yesBtn");
+
+const noBtn =
+    document.getElementById("noBtn");
 
 const questionCard =
     document.getElementById("questionCard");
@@ -414,28 +612,310 @@ const musicBtn =
 let musicPlaying = false;
 
 
-/* -------------------------
+/* =========================
    MUSIC
-------------------------- */
+========================= */
 
 function startMusic() {
 
     music.play()
         .then(() => {
+
             musicPlaying = true;
+
             musicBtn.textContent = "🔊";
+
         })
-        .catch(() => {});
+        .catch(() => {
+
+            /*
+            Browser blocked autoplay.
+            User can press the music button.
+            */
+
+        });
 }
 
 
-document.body.addEventListener(
+/* Music button */
+
+musicBtn.addEventListener(
     "click",
-    startMusic,
-    { once: true }
+    function(event) {
+
+        event.stopPropagation();
+
+        if (musicPlaying) {
+
+            music.pause();
+
+            musicPlaying = false;
+
+            musicBtn.textContent = "🎵";
+
+        }
+
+        else {
+
+            music.play()
+                .then(() => {
+
+                    musicPlaying = true;
+
+                    musicBtn.textContent = "🔊";
+
+                })
+                .catch(() => {});
+
+        }
+
+    }
 );
 
 
-musicBtn.addEventListener("click", function(e) {
+/* =========================
+   YES BUTTON
+========================= */
 
-    e.stop
+yesBtn.addEventListener(
+    "click",
+    function() {
+
+        forgive();
+
+    }
+);
+
+
+/* =========================
+   NO BUTTON
+========================= */
+
+noBtn.addEventListener(
+    "click",
+    function() {
+
+        /*
+        Change NO into YES
+        */
+
+        noBtn.textContent =
+            "Yes ❤️";
+
+
+        /*
+        Change appearance
+        */
+
+        noBtn.style.background =
+            "white";
+
+        noBtn.style.color =
+            "#ff416c";
+
+        noBtn.style.border =
+            "none";
+
+        noBtn.style.boxShadow =
+            "0 10px 30px rgba(0,0,0,.2)";
+
+
+        /*
+        IMPORTANT:
+        Remove the old click behavior
+        and make this button a YES button.
+        */
+
+        noBtn.onclick =
+            function() {
+
+                forgive();
+
+            };
+
+
+        /*
+        Little heart celebration
+        */
+
+        createHearts(15);
+
+
+        /*
+        Start music
+        */
+
+        startMusic();
+
+    }
+);
+
+
+/* =========================
+   FORGIVE
+========================= */
+
+function forgive() {
+
+    questionCard.style.display =
+        "none";
+
+
+    successCard.style.display =
+        "block";
+
+
+    /*
+    Start music
+    */
+
+    startMusic();
+
+
+    /*
+    Big heart celebration
+    */
+
+    createHearts(60);
+
+}
+
+
+/* =========================
+   HEART TYPES
+========================= */
+
+const heartTypes = [
+
+    "❤️",
+    "💕",
+    "💗",
+    "💖",
+    "💘",
+    "💝"
+
+];
+
+
+/* =========================
+   CREATE ONE HEART
+========================= */
+
+function createHeart() {
+
+    const heart =
+        document.createElement("div");
+
+
+    heart.className =
+        "heart";
+
+
+    heart.textContent =
+        heartTypes[
+            Math.floor(
+                Math.random()
+                *
+                heartTypes.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+
+    heart.style.fontSize =
+        (
+            15
+            +
+            Math.random() * 25
+        )
+        +
+        "px";
+
+
+    heart.style.animationDuration =
+        (
+            5
+            +
+            Math.random() * 6
+        )
+        +
+        "s";
+
+
+    document.body.appendChild(
+        heart
+    );
+
+
+    setTimeout(
+        function() {
+
+            heart.remove();
+
+        },
+        12000
+    );
+
+}
+
+
+/* =========================
+   BACKGROUND HEARTS
+========================= */
+
+setInterval(
+    createHeart,
+    700
+);
+
+
+/* =========================
+   HEART CELEBRATION
+========================= */
+
+function createHearts(amount) {
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        setTimeout(
+            function() {
+
+                createHeart();
+
+            },
+            i * 50
+        );
+
+    }
+
+}
+
+
+/* =========================
+   START SOME HEARTS
+========================= */
+
+for (
+    let i = 0;
+    i < 5;
+    i++
+) {
+
+    setTimeout(
+        createHeart,
+        i * 500
+    );
+
+}
+
+</script>
+
+</body>
+</html>
