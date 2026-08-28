@@ -4,223 +4,341 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>One Little Question ❤️</title>
+<title>For Reem ❤️</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", Arial, sans-serif;
+    color: white;
+
+    background:
+        radial-gradient(circle at 20% 20%, #ffb3c6 0%, transparent 30%),
+        radial-gradient(circle at 80% 80%, #9b5de5 0%, transparent 30%),
+        linear-gradient(135deg, #ff416c, #7b2cbf);
+}
+
+/* Background glow */
+
+.glow {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: .35;
+    animation: moveGlow 8s infinite alternate ease-in-out;
+}
+
+.glow.one {
+    background: #ff1744;
+    top: -100px;
+    left: -100px;
+}
+
+.glow.two {
+    background: #e040fb;
+    bottom: -100px;
+    right: -100px;
+    animation-delay: 2s;
+}
+
+@keyframes moveGlow {
+    from {
+        transform: translate(0, 0) scale(1);
     }
 
-    body {
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        font-family: Arial, sans-serif;
+    to {
+        transform: translate(80px, 60px) scale(1.3);
+    }
+}
 
-        background:
-            radial-gradient(circle at top left, #ffb6c9, transparent 35%),
-            radial-gradient(circle at bottom right, #c8a7ff, transparent 35%),
-            linear-gradient(135deg, #ff758c, #ff7eb3);
+/* Floating hearts */
 
-        color: white;
+.heart {
+    position: fixed;
+    bottom: -40px;
+    pointer-events: none;
+    animation: floatUp linear forwards;
+    opacity: 0;
+    z-index: 1;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
     }
 
-    /* Floating hearts */
-    .heart {
-        position: absolute;
-        bottom: -50px;
-        font-size: 20px;
-        opacity: 0.7;
-        animation: floatUp linear infinite;
-        pointer-events: none;
+    15% {
+        opacity: .8;
     }
 
-    @keyframes floatUp {
-        0% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 0;
-        }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
 
-        20% {
-            opacity: 0.8;
-        }
+/* Main card */
 
-        100% {
-            transform: translateY(-110vh) rotate(360deg);
-            opacity: 0;
-        }
+.card {
+    position: relative;
+    z-index: 5;
+    width: min(90%, 440px);
+    padding: 45px 28px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.25);
+
+    animation: cardIn 1.2s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(.9);
     }
 
-    /* Main card */
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Heart */
+
+.main-heart {
+    font-size: 75px;
+    margin-bottom: 15px;
+
+    animation:
+        heartbeat 1.3s infinite,
+        glowHeart 2s infinite alternate;
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+@keyframes glowHeart {
+    from {
+        filter: drop-shadow(0 0 5px rgba(255,255,255,.5));
+    }
+
+    to {
+        filter: drop-shadow(0 0 25px rgba(255,255,255,.9));
+    }
+}
+
+/* Text */
+
+.small {
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: .85;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: clamp(30px, 8vw, 44px);
+    margin-bottom: 15px;
+}
+
+.message {
+    font-size: 17px;
+    line-height: 1.7;
+    opacity: .95;
+    margin-bottom: 30px;
+}
+
+/* Buttons */
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+button {
+    border: none;
+    border-radius: 50px;
+
+    padding: 15px 30px;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        background .25s;
+}
+
+button:hover {
+    transform: translateY(-5px) scale(1.04);
+}
+
+button:active {
+    transform: scale(.94);
+}
+
+#yesBtn {
+    background: white;
+    color: #ff416c;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.2);
+}
+
+#noBtn {
+    color: white;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.5);
+}
+
+/* Music button */
+
+.music {
+    position: fixed;
+    z-index: 20;
+
+    top: 20px;
+    right: 20px;
+
+    width: 48px;
+    height: 48px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.2);
+    color: white;
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,.3);
+}
+
+/* Success */
+
+.success {
+    display: none;
+}
+
+.success-heart {
+    font-size: 100px;
+
+    animation:
+        heartbeat .9s infinite,
+        spinHeart 5s infinite linear;
+}
+
+@keyframes spinHeart {
+    0% {
+        transform: rotate(-5deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(5deg) scale(1.15);
+    }
+
+    100% {
+        transform: rotate(-5deg) scale(1);
+    }
+}
+
+.success h1 {
+    margin-top: 10px;
+}
+
+.signature {
+    margin-top: 25px;
+    font-size: 18px;
+    font-style: italic;
+}
+
+/* Mobile */
+
+@media(max-width:500px) {
+
     .card {
-        width: min(90%, 450px);
-        padding: 45px 30px;
-        text-align: center;
-
-        background: rgba(255, 255, 255, 0.16);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-
-        border: 1px solid rgba(255,255,255,0.3);
-        border-radius: 30px;
-
-        box-shadow:
-            0 25px 60px rgba(0,0,0,0.2);
-
-        animation: appear 1s ease;
-        z-index: 2;
+        padding: 38px 22px;
     }
 
-    @keyframes appear {
-        from {
-            opacity: 0;
-            transform: translateY(30px) scale(0.95);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-    }
-
-    .emoji {
-        font-size: 70px;
-        margin-bottom: 20px;
-        animation: heartbeat 1.5s infinite;
-    }
-
-    @keyframes heartbeat {
-        0%, 100% {
-            transform: scale(1);
-        }
-
-        50% {
-            transform: scale(1.12);
-        }
-    }
-
-    h1 {
-        font-size: clamp(28px, 7vw, 42px);
-        margin-bottom: 15px;
-        font-weight: 700;
-    }
-
-    .message {
-        font-size: 17px;
-        line-height: 1.6;
-        opacity: 0.95;
-        margin-bottom: 30px;
-    }
-
-    /* Buttons */
     .buttons {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        flex-wrap: wrap;
+        flex-direction: column;
     }
 
     button {
-        border: none;
-        padding: 14px 28px;
-        border-radius: 50px;
-        font-size: 17px;
-        font-weight: bold;
-        cursor: pointer;
-
-        transition:
-            transform 0.25s ease,
-            box-shadow 0.25s ease,
-            background 0.25s ease;
+        width: 100%;
     }
-
-    #yesBtn {
-        background: white;
-        color: #ff4f81;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-
-    #noBtn {
-        background: rgba(255,255,255,0.2);
-        color: white;
-        border: 1px solid rgba(255,255,255,0.5);
-    }
-
-    button:hover {
-        transform: translateY(-4px) scale(1.04);
-    }
-
-    button:active {
-        transform: scale(0.95);
-    }
-
-    /* Success screen */
-    .success {
-        display: none;
-    }
-
-    .success h1 {
-        font-size: 40px;
-    }
-
-    .success-message {
-        font-size: 18px;
-        line-height: 1.7;
-        margin-top: 15px;
-    }
-
-    .big-heart {
-        font-size: 90px;
-        animation: heartbeat 1s infinite;
-    }
-
-    /* Small screen */
-    @media (max-width: 500px) {
-        .card {
-            padding: 35px 22px;
-        }
-
-        .emoji {
-            font-size: 60px;
-        }
-
-        .buttons {
-            flex-direction: column;
-        }
-
-        button {
-            width: 100%;
-        }
-    }
+}
 </style>
 </head>
 
 <body>
 
-<!-- Floating hearts -->
-<div class="heart" style="left:5%; animation-duration:8s;">❤️</div>
-<div class="heart" style="left:15%; animation-duration:11s; animation-delay:2s;">💕</div>
-<div class="heart" style="left:28%; animation-duration:9s; animation-delay:4s;">💗</div>
-<div class="heart" style="left:45%; animation-duration:12s; animation-delay:1s;">❤️</div>
-<div class="heart" style="left:60%; animation-duration:10s; animation-delay:3s;">💖</div>
-<div class="heart" style="left:75%; animation-duration:9s; animation-delay:5s;">💕</div>
-<div class="heart" style="left:90%; animation-duration:13s;">❤️</div>
+<div class="glow one"></div>
+<div class="glow two"></div>
+
+<!-- Music -->
+<audio id="music" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music" id="musicBtn">🎵</button>
 
 
-<!-- Question -->
+<!-- QUESTION -->
+
 <div class="card" id="questionCard">
 
-    <div class="emoji">🥺</div>
+    <div class="main-heart">❤️</div>
 
-    <h1>Will you forgive me?</h1>
+    <div class="small">
+        A little question for you
+    </div>
+
+    <h1>Reem...</h1>
 
     <p class="message">
-        I know you're mad at me...<br>
-        But I'm really sorry. ❤️
+        I know you're mad at me. 🥺<br><br>
+
+        But there's someone here who is
+        really, really sorry...
+        <br><br>
+
+        <b>Will you forgive me?</b>
     </p>
 
     <div class="buttons">
@@ -238,19 +356,39 @@
 </div>
 
 
-<!-- Success -->
+<!-- SUCCESS -->
+
 <div class="card success" id="successCard">
 
-    <div class="big-heart">❤️</div>
+    <div class="success-heart">
+        ❤️
+    </div>
 
-    <h1>I knew it! 🥹</h1>
+    <div class="small">
+        I knew it...
+    </div>
 
-    <p class="success-message">
-        Thank you for forgiving me. ❤️<br><br>
-        I promise I'll try to make it up to you.
+    <h1>Thank you, Reem 🥹</h1>
+
+    <p class="message">
+
+        You just made Ikru very happy. ❤️
         <br><br>
-        Now come here 🫂
+
+        I'm really sorry.
+        <br>
+
+        Now no more being mad at me...
+        okay? 🥺
+        <br><br>
+
+        Come here 🫂❤️
+
     </p>
+
+    <div class="signature">
+        — With love, Ikru ❤️
+    </div>
 
 </div>
 
@@ -260,96 +398,44 @@
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 
-const questionCard = document.getElementById("questionCard");
-const successCard = document.getElementById("successCard");
+const questionCard =
+    document.getElementById("questionCard");
+
+const successCard =
+    document.getElementById("successCard");
+
+const music =
+    document.getElementById("music");
+
+const musicBtn =
+    document.getElementById("musicBtn");
 
 
-/* When she clicks NO */
-noBtn.addEventListener("click", function() {
-
-    noBtn.textContent = "Yes ❤️";
-
-    noBtn.style.background = "white";
-    noBtn.style.color = "#ff4f81";
-    noBtn.style.border = "none";
-
-    yesBtn.textContent = "Yes ❤️";
-
-});
+let musicPlaying = false;
 
 
-/* When she clicks YES */
-yesBtn.addEventListener("click", forgive);
+/* -------------------------
+   MUSIC
+------------------------- */
 
-noBtn.addEventListener("click", function() {
+function startMusic() {
 
-    if (noBtn.textContent === "Yes ❤️") {
-        noBtn.addEventListener("click", forgive, { once: true });
-    }
-
-});
-
-
-function forgive() {
-
-    questionCard.style.display = "none";
-
-    successCard.style.display = "block";
-
-    createHearts();
-
+    music.play()
+        .then(() => {
+            musicPlaying = true;
+            musicBtn.textContent = "🔊";
+        })
+        .catch(() => {});
 }
 
 
-/* Celebration hearts */
-function createHearts() {
+document.body.addEventListener(
+    "click",
+    startMusic,
+    { once: true }
+);
 
-    for (let i = 0; i < 25; i++) {
 
-        const heart = document.createElement("div");
+musicBtn.addEventListener("click", function(e) {
 
-        heart.innerHTML = ["❤️","💕","💖","💗","💘"]
-            [Math.floor(Math.random() * 5)];
-
-        heart.style.position = "fixed";
-        heart.style.left = Math.random() * 100 + "%";
-        heart.style.bottom = "-30px";
-        heart.style.fontSize =
-            (20 + Math.random() * 25) + "px";
-
-        heart.style.zIndex = "10";
-        heart.style.pointerEvents = "none";
-
-        document.body.appendChild(heart);
-
-        const duration = 3 + Math.random() * 3;
-
-        heart.animate(
-            [
-                {
-                    transform: "translateY(0) scale(1)",
-                    opacity: 1
-                },
-                {
-                    transform:
-                        `translateY(-${window.innerHeight + 100}px) rotate(360deg) scale(1.5)`,
-                    opacity: 0
-                }
-            ],
-            {
-                duration: duration * 1000,
-                easing: "ease-out"
-            }
-        );
-
-        setTimeout(() => {
-            heart.remove();
-        }, duration * 1000);
-    }
-
-}
-
-</script>
-
-</body>
-</html>
+    e.stop
