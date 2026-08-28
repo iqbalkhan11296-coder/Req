@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>For Reem ❤️</title>
 
 <style>
+
 * {
     margin: 0;
     padding: 0;
@@ -14,46 +16,81 @@
 }
 
 body {
+
     min-height: 100vh;
+
     overflow: hidden;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     font-family: Arial, sans-serif;
+
     color: white;
 
     background:
-        radial-gradient(circle at 20% 20%, #ffb3c6 0%, transparent 30%),
-        radial-gradient(circle at 80% 80%, #9b5de5 0%, transparent 30%),
-        linear-gradient(135deg, #ff416c, #7b2cbf);
+        radial-gradient(
+            circle at 20% 20%,
+            #ffb3c6 0%,
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 80% 80%,
+            #9b5de5 0%,
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #ff416c,
+            #7b2cbf
+        );
 }
+
 
 /* =========================
    BACKGROUND GLOW
 ========================= */
 
 .glow {
+
     position: fixed;
+
     width: 300px;
     height: 300px;
+
     border-radius: 50%;
+
     filter: blur(80px);
+
     opacity: .35;
 
-    animation: moveGlow 8s infinite alternate ease-in-out;
+    animation:
+        moveGlow
+        8s
+        infinite
+        alternate
+        ease-in-out;
 
     pointer-events: none;
 }
 
 .glow.one {
+
     background: #ff1744;
+
     top: -100px;
     left: -100px;
 }
 
 .glow.two {
+
     background: #e040fb;
+
     bottom: -100px;
     right: -100px;
 
@@ -61,12 +98,19 @@ body {
 }
 
 @keyframes moveGlow {
+
     from {
-        transform: translate(0, 0) scale(1);
+
+        transform:
+            translate(0, 0)
+            scale(1);
     }
 
     to {
-        transform: translate(80px, 60px) scale(1.3);
+
+        transform:
+            translate(80px, 60px)
+            scale(1.3);
     }
 }
 
@@ -76,7 +120,9 @@ body {
 ========================= */
 
 .heart {
+
     position: fixed;
+
     bottom: -50px;
 
     pointer-events: none;
@@ -85,12 +131,16 @@ body {
 
     z-index: 1;
 
-    animation: floatUp linear forwards;
+    animation:
+        floatUp
+        linear
+        forwards;
 }
 
 @keyframes floatUp {
 
     0% {
+
         transform:
             translateY(0)
             rotate(0deg);
@@ -99,10 +149,12 @@ body {
     }
 
     15% {
+
         opacity: .8;
     }
 
     100% {
+
         transform:
             translateY(-110vh)
             rotate(360deg);
@@ -117,6 +169,7 @@ body {
 ========================= */
 
 .card {
+
     position: relative;
 
     z-index: 5;
@@ -127,36 +180,46 @@ body {
 
     text-align: center;
 
-    background: rgba(255,255,255,.15);
+    background:
+        rgba(255,255,255,.15);
 
     border:
         1px solid
         rgba(255,255,255,.3);
 
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter:
+        blur(25px);
+
+    -webkit-backdrop-filter:
+        blur(25px);
 
     border-radius: 30px;
 
     box-shadow:
-        0 30px 80px rgba(0,0,0,.25);
+        0 30px 80px
+        rgba(0,0,0,.25);
 
     animation:
-        cardIn 1.2s
+        cardIn
+        1.2s
         cubic-bezier(.2,.8,.2,1);
 }
 
 @keyframes cardIn {
 
     from {
+
         opacity: 0;
+
         transform:
             translateY(50px)
             scale(.9);
     }
 
     to {
+
         opacity: 1;
+
         transform:
             translateY(0)
             scale(1);
@@ -165,96 +228,86 @@ body {
 
 
 /* =========================
-   MAIN HEART
+   PASSWORD SCREEN
 ========================= */
 
-.main-heart {
+#lockScreen {
+
+    display: block;
+}
+
+.lock-icon {
+
     font-size: 75px;
 
     margin-bottom: 15px;
 
     animation:
-        heartbeat 1.3s infinite,
-        glowHeart 2s infinite alternate;
+        lockPulse
+        2s
+        infinite;
 }
 
-@keyframes heartbeat {
+@keyframes lockPulse {
 
-    0%,100% {
+    0%, 100% {
+
         transform: scale(1);
     }
 
     50% {
-        transform: scale(1.15);
+
+        transform: scale(1.1);
     }
 }
 
-@keyframes glowHeart {
+.lock-message {
 
-    from {
-        filter:
-            drop-shadow(
-                0 0 5px
-                rgba(255,255,255,.5)
-            );
-    }
-
-    to {
-        filter:
-            drop-shadow(
-                0 0 25px
-                rgba(255,255,255,.9)
-            );
-    }
-}
-
-
-/* =========================
-   TEXT
-========================= */
-
-.small {
-    font-size: 14px;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
-    opacity: .85;
-
-    margin-bottom: 10px;
-}
-
-h1 {
-    font-size:
-        clamp(30px, 8vw, 44px);
-
-    margin-bottom: 15px;
-}
-
-.message {
     font-size: 17px;
 
     line-height: 1.7;
 
-    opacity: .95;
-
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 
 /* =========================
-   BUTTONS
+   PASSWORD INPUT
 ========================= */
 
-.buttons {
+.password-box {
 
-    display: flex;
+    width: 100%;
 
-    justify-content: center;
+    padding: 15px 20px;
 
-    gap: 14px;
+    border: none;
+
+    outline: none;
+
+    border-radius: 50px;
+
+    font-size: 16px;
+
+    text-align: center;
+
+    margin-bottom: 15px;
+
+    background:
+        rgba(255,255,255,.95);
+
+    color: #333;
 }
+
+.password-box::placeholder {
+
+    color: #999;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
 
 button {
 
@@ -291,9 +344,13 @@ button:active {
 }
 
 
-/* YES */
+/* =========================
+   UNLOCK BUTTON
+========================= */
 
-#yesBtn {
+.unlock-btn {
+
+    width: 100%;
 
     background: white;
 
@@ -305,7 +362,175 @@ button:active {
 }
 
 
-/* NO */
+/* =========================
+   PASSWORD ERROR
+========================= */
+
+#error {
+
+    display: none;
+
+    margin-top: 15px;
+
+    font-size: 14px;
+
+    color: #ffe4ec;
+}
+
+.shake {
+
+    animation:
+        shake .4s;
+}
+
+@keyframes shake {
+
+    0%, 100% {
+
+        transform:
+            translateX(0);
+    }
+
+    25% {
+
+        transform:
+            translateX(-8px);
+    }
+
+    75% {
+
+        transform:
+            translateX(8px);
+    }
+}
+
+
+/* =========================
+   QUESTION CARD
+========================= */
+
+#questionCard {
+
+    display: none;
+}
+
+
+/* =========================
+   MAIN HEART
+========================= */
+
+.main-heart {
+
+    font-size: 75px;
+
+    margin-bottom: 15px;
+
+    animation:
+        heartbeat 1.3s infinite,
+        glowHeart 2s infinite alternate;
+}
+
+@keyframes heartbeat {
+
+    0%,100% {
+
+        transform:
+            scale(1);
+    }
+
+    50% {
+
+        transform:
+            scale(1.15);
+    }
+}
+
+@keyframes glowHeart {
+
+    from {
+
+        filter:
+            drop-shadow(
+                0 0 5px
+                rgba(255,255,255,.5)
+            );
+    }
+
+    to {
+
+        filter:
+            drop-shadow(
+                0 0 25px
+                rgba(255,255,255,.9)
+            );
+    }
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.small {
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    opacity: .85;
+
+    margin-bottom: 10px;
+}
+
+h1 {
+
+    font-size:
+        clamp(
+            30px,
+            8vw,
+            44px
+        );
+
+    margin-bottom: 15px;
+}
+
+.message {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    opacity: .95;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   YES / NO BUTTONS
+========================= */
+
+.buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 14px;
+}
+
+#yesBtn {
+
+    background: white;
+
+    color: #ff416c;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.2);
+}
 
 #noBtn {
 
@@ -331,9 +556,11 @@ button:active {
     z-index: 20;
 
     top: 20px;
+
     right: 20px;
 
     width: 48px;
+
     height: 48px;
 
     padding: 0;
@@ -355,7 +582,7 @@ button:active {
 
 
 /* =========================
-   SUCCESS SCREEN
+   SUCCESS
 ========================= */
 
 .success {
@@ -368,17 +595,23 @@ button:active {
     font-size: 100px;
 
     animation:
-        successBeat 1s infinite;
+        successBeat
+        1s
+        infinite;
 }
 
 @keyframes successBeat {
 
     0%,100% {
-        transform: scale(1);
+
+        transform:
+            scale(1);
     }
 
     50% {
-        transform: scale(1.2);
+
+        transform:
+            scale(1.2);
     }
 }
 
@@ -414,12 +647,14 @@ button:active {
         flex-direction: column;
     }
 
-    button {
+    .buttons button {
 
         width: 100%;
     }
 }
+
 </style>
+
 </head>
 
 
@@ -431,14 +666,18 @@ button:active {
 ========================= -->
 
 <div class="glow one"></div>
+
 <div class="glow two"></div>
+
 
 
 <!-- =========================
      MUSIC
 ========================= -->
 
-<audio id="music" loop>
+<audio
+    id="music"
+    loop>
 
     <source
         src="song.mp3"
@@ -458,6 +697,77 @@ button:active {
 
 
 <!-- =========================
+     PASSWORD SCREEN
+========================= -->
+
+<div
+    class="card"
+    id="lockScreen">
+
+
+    <div class="lock-icon">
+
+        🔐
+
+    </div>
+
+
+    <div class="small">
+
+        A little secret
+
+    </div>
+
+
+    <h1>
+
+        Hey Reem ❤️
+
+    </h1>
+
+
+    <p class="lock-message">
+
+        This little page is only
+        for you. 🥺
+
+        <br><br>
+
+        Enter the secret password
+        to see what's waiting
+        for you. ❤️
+
+    </p>
+
+
+    <input
+        type="password"
+        id="passwordInput"
+        class="password-box"
+        placeholder="Enter password"
+        autocomplete="off">
+
+
+    <button
+        class="unlock-btn"
+        id="unlockBtn">
+
+        Unlock ❤️
+
+    </button>
+
+
+    <div id="error">
+
+        Wrong password 😭
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
      QUESTION CARD
 ========================= -->
 
@@ -467,17 +777,23 @@ button:active {
 
 
     <div class="main-heart">
+
         ❤️
+
     </div>
 
 
     <div class="small">
+
         A little question for you
+
     </div>
 
 
     <h1>
-        മുത്തേ 
+
+        മുത്തേ
+
     </h1>
 
 
@@ -492,7 +808,9 @@ button:active {
         <br><br>
 
         <b>
+
             Pleaseeee shemikkk
+
         </b>
 
     </p>
@@ -539,7 +857,9 @@ button:active {
 
     <div class="small">
 
-        Thanks mwthwe..  Ini orikkalum njn anagne cheyilla
+        Thanks mwthwe..
+        Ini orikkalum njn
+        anagne cheyilla
 
     </div>
 
@@ -553,8 +873,7 @@ button:active {
 
     <p class="message">
 
-        Love You
-❤️
+        Love You ❤️
 
         <br><br>
 
@@ -583,58 +902,161 @@ button:active {
 
 <script>
 
+
 /* =========================
-   GET ELEMENTS
+   PASSWORD
 ========================= */
 
-const yesBtn =
-    document.getElementById("yesBtn");
 
-const noBtn =
-    document.getElementById("noBtn");
+/*
+   CHANGE PASSWORD HERE
+*/
+
+const PASSWORD = "reem123";
+
+
+const lockScreen =
+    document.getElementById(
+        "lockScreen"
+    );
+
+const passwordInput =
+    document.getElementById(
+        "passwordInput"
+    );
+
+const unlockBtn =
+    document.getElementById(
+        "unlockBtn"
+    );
+
+const error =
+    document.getElementById(
+        "error"
+    );
 
 const questionCard =
-    document.getElementById("questionCard");
-
-const successCard =
-    document.getElementById("successCard");
-
-const music =
-    document.getElementById("music");
-
-const musicBtn =
-    document.getElementById("musicBtn");
+    document.getElementById(
+        "questionCard"
+    );
 
 
-let musicPlaying = false;
+unlockBtn.addEventListener(
+    "click",
+    checkPassword
+);
+
+
+passwordInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            checkPassword();
+
+        }
+
+    }
+);
+
+
+function checkPassword() {
+
+    if (
+        passwordInput.value === PASSWORD
+    ) {
+
+        lockScreen.style.display =
+            "none";
+
+        questionCard.style.display =
+            "block";
+
+        createHearts(15);
+
+        startMusic();
+
+    }
+
+    else {
+
+        error.style.display =
+            "block";
+
+        passwordInput.classList.add(
+            "shake"
+        );
+
+        passwordInput.value = "";
+
+        passwordInput.focus();
+
+
+        setTimeout(
+            function() {
+
+                error.style.display =
+                    "none";
+
+                passwordInput.classList.remove(
+                    "shake"
+                );
+
+            },
+            1500
+        );
+
+    }
+
+}
 
 
 /* =========================
    MUSIC
 ========================= */
 
+const music =
+    document.getElementById(
+        "music"
+    );
+
+const musicBtn =
+    document.getElementById(
+        "musicBtn"
+    );
+
+let musicPlaying = false;
+
+
 function startMusic() {
 
     music.play()
-        .then(() => {
+        .then(
+            function() {
 
-            musicPlaying = true;
+                musicPlaying = true;
 
-            musicBtn.textContent = "🔊";
+                musicBtn.textContent =
+                    "🔊";
 
-        })
-        .catch(() => {
+            }
+        )
+        .catch(
+            function() {
 
-            /*
-            Browser blocked autoplay.
-            User can press the music button.
-            */
+                /*
+                   Phone browser may block
+                   automatic music.
+                */
 
-        });
+            }
+        );
+
 }
 
-
-/* Music button */
 
 musicBtn.addEventListener(
     "click",
@@ -642,27 +1064,35 @@ musicBtn.addEventListener(
 
         event.stopPropagation();
 
+
         if (musicPlaying) {
 
             music.pause();
 
             musicPlaying = false;
 
-            musicBtn.textContent = "🎵";
+            musicBtn.textContent =
+                "🎵";
 
         }
 
         else {
 
             music.play()
-                .then(() => {
+                .then(
+                    function() {
 
-                    musicPlaying = true;
+                        musicPlaying =
+                            true;
 
-                    musicBtn.textContent = "🔊";
+                        musicBtn.textContent =
+                            "🔊";
 
-                })
-                .catch(() => {});
+                    }
+                )
+                .catch(
+                    function() {}
+                );
 
         }
 
@@ -673,6 +1103,12 @@ musicBtn.addEventListener(
 /* =========================
    YES BUTTON
 ========================= */
+
+const yesBtn =
+    document.getElementById(
+        "yesBtn"
+    );
+
 
 yesBtn.addEventListener(
     "click",
@@ -685,64 +1121,74 @@ yesBtn.addEventListener(
 
 
 /* =========================
-   NO BUTTON
+   NO → YES
 ========================= */
+
+const noBtn =
+    document.getElementById(
+        "noBtn"
+    );
+
+
+let noChangedToYes = false;
+
 
 noBtn.addEventListener(
     "click",
     function() {
 
-        /*
-        Change NO into YES
-        */
-
-        noBtn.textContent =
-            "Yes ❤️";
-
 
         /*
-        Change appearance
+           FIRST CLICK
+
+           NO becomes YES
         */
 
-        noBtn.style.background =
-            "white";
-
-        noBtn.style.color =
-            "#ff416c";
-
-        noBtn.style.border =
-            "none";
-
-        noBtn.style.boxShadow =
-            "0 10px 30px rgba(0,0,0,.2)";
+        if (!noChangedToYes) {
 
 
-        /*
-        IMPORTANT:
-        Remove the old click behavior
-        and make this button a YES button.
-        */
-
-        noBtn.onclick =
-            function() {
-
-                forgive();
-
-            };
+            noBtn.textContent =
+                "Yes ❤️";
 
 
-        /*
-        Little heart celebration
-        */
+            noBtn.style.background =
+                "white";
 
-        createHearts(15);
+
+            noBtn.style.color =
+                "#ff416c";
+
+
+            noBtn.style.border =
+                "none";
+
+
+            noBtn.style.boxShadow =
+                "0 10px 30px rgba(0,0,0,.2)";
+
+
+            noChangedToYes = true;
+
+
+            createHearts(20);
+
+
+            startMusic();
+
+        }
 
 
         /*
-        Start music
+           SECOND CLICK
+
+           This is now YES
         */
 
-        startMusic();
+        else {
+
+            forgive();
+
+        }
 
     }
 );
@@ -758,20 +1204,14 @@ function forgive() {
         "none";
 
 
-    successCard.style.display =
+    document.getElementById(
+        "successCard"
+    ).style.display =
         "block";
 
 
-    /*
-    Start music
-    */
-
     startMusic();
 
-
-    /*
-    Big heart celebration
-    */
 
     createHearts(60);
 
@@ -795,13 +1235,15 @@ const heartTypes = [
 
 
 /* =========================
-   CREATE ONE HEART
+   CREATE HEART
 ========================= */
 
 function createHeart() {
 
     const heart =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     heart.className =
@@ -819,7 +1261,8 @@ function createHeart() {
 
 
     heart.style.left =
-        Math.random() * 100 + "vw";
+        Math.random() * 100
+        + "vw";
 
 
     heart.style.fontSize =
@@ -828,8 +1271,7 @@ function createHeart() {
             +
             Math.random() * 25
         )
-        +
-        "px";
+        + "px";
 
 
     heart.style.animationDuration =
@@ -838,8 +1280,7 @@ function createHeart() {
             +
             Math.random() * 6
         )
-        +
-        "s";
+        + "s";
 
 
     document.body.appendChild(
@@ -870,7 +1311,7 @@ setInterval(
 
 
 /* =========================
-   HEART CELEBRATION
+   HEART BURST
 ========================= */
 
 function createHearts(amount) {
@@ -896,7 +1337,7 @@ function createHearts(amount) {
 
 
 /* =========================
-   START SOME HEARTS
+   INITIAL HEARTS
 ========================= */
 
 for (
