@@ -1,6 +1,6 @@
-// ================================
-// CHAT SETTINGS
-// ================================
+// ========================================
+// PRIVATE CHAT
+// ========================================
 
 let currentUser = localStorage.getItem("chatUser");
 
@@ -15,11 +15,12 @@ const logoutBtn = document.getElementById("logoutBtn");
 const messagesDiv = document.getElementById("messages");
 const messageForm = document.getElementById("messageForm");
 const messageInput = document.getElementById("messageInput");
+const sendBtn = document.getElementById("sendBtn");
 
 
-// ================================
-// LOGIN
-// ================================
+// ========================================
+// SHOW CHAT
+// ========================================
 
 function showChat() {
 
@@ -32,6 +33,10 @@ function showChat() {
 }
 
 
+// ========================================
+// SHOW LOGIN
+// ========================================
+
 function showLogin() {
 
     chatApp.classList.add("hidden");
@@ -41,14 +46,18 @@ function showLogin() {
 }
 
 
-// Login button
+// ========================================
+// LOGIN
+// ========================================
 
 loginBtn.addEventListener("click", () => {
 
     const name = nameInput.value.trim();
 
     if (!name) {
+
         alert("Please enter your name ❤️");
+
         return;
     }
 
@@ -63,18 +72,27 @@ loginBtn.addEventListener("click", () => {
 });
 
 
-// Press Enter to login
+// ========================================
+// ENTER KEY LOGIN
+// ========================================
 
-nameInput.addEventListener("keydown", (event) => {
+nameInput.addEventListener(
+    "keydown",
+    (event) => {
 
-    if (event.key === "Enter") {
-        loginBtn.click();
+        if (event.key === "Enter") {
+
+            loginBtn.click();
+
+        }
+
     }
+);
 
-});
 
-
-// Logout
+// ========================================
+// LOGOUT
+// ========================================
 
 logoutBtn.addEventListener("click", () => {
 
@@ -87,18 +105,28 @@ logoutBtn.addEventListener("click", () => {
 });
 
 
-// ================================
+// ========================================
 // LOAD MESSAGES
-// ================================
+// ========================================
 
 async function loadMessages() {
 
-    const { data, error } = await db
-        .from("messages")
+    const {
+        data,
+        error
+    } = await db
+
+        .from("private_chat_messages")
+
         .select("*")
-        .order("created_at", {
-            ascending: true
-        });
+
+        .order(
+            "created_at",
+            {
+                ascending: true
+            }
+        );
+
 
     if (error) {
 
@@ -107,39 +135,66 @@ async function loadMessages() {
             error
         );
 
-        return;
-    }
-
-    messagesDiv.innerHTML = "";
-
-    if (!data || data.length === 0) {
-
         messagesDiv.innerHTML = `
             <div class="welcome-message">
-                <div>❤️</div>
-                <p>Start our conversation...</p>
+                <div>⚠️</div>
+                <p>Unable to load messages.</p>
             </div>
         `;
 
         return;
     }
 
-    data.forEach(message => {
-        displayMessage(message);
-    });
+
+    messagesDiv.innerHTML = "";
+
+
+    if (!data || data.length === 0) {
+
+        showWelcomeMessage();
+
+        return;
+    }
+
+
+    data.forEach(
+        message => {
+
+            displayMessage(message);
+
+        }
+    );
+
 
     scrollToBottom();
 }
 
 
-// ================================
+// ========================================
+// WELCOME MESSAGE
+// ========================================
+
+function showWelcomeMessage() {
+
+    messagesDiv.innerHTML = `
+        <div class="welcome-message">
+            <div>❤️</div>
+            <p>Start our conversation...</p>
+        </div>
+    `;
+
+}
+
+
+// ========================================
 // DISPLAY MESSAGE
-// ================================
+// ========================================
 
 function displayMessage(message) {
 
     const isMine =
         message.sender === currentUser;
+
 
     const messageDiv =
         document.createElement("div");
@@ -163,7 +218,9 @@ function displayMessage(message) {
         "sender-name";
 
     sender.textContent =
-        isMine ? "You" : message.sender;
+        isMine
+            ? "You"
+            : message.sender;
 
 
     const text =
@@ -183,11 +240,15 @@ function displayMessage(message) {
         "message-time";
 
     time.textContent =
-        formatTime(message.created_at);
+        formatTime(
+            message.created_at
+        );
 
 
     content.appendChild(sender);
+
     content.appendChild(text);
+
     content.appendChild(time);
 
     messageDiv.appendChild(content);
@@ -196,9 +257,9 @@ function displayMessage(message) {
 }
 
 
-// ================================
+// ========================================
 // SEND MESSAGE
-// ================================
+// ========================================
 
 messageForm.addEventListener(
     "submit",
@@ -206,29 +267,41 @@ messageForm.addEventListener(
 
         event.preventDefault();
 
+
         const text =
             messageInput.value.trim();
 
+
         if (!text) {
+
             return;
+
         }
+
 
         if (!currentUser) {
-            alert("Please login first.");
+
+            alert(
+                "Please login first."
+            );
+
             return;
         }
 
 
-        // Disable button while sending
-
-        const sendBtn =
-            document.getElementById("sendBtn");
+        // Disable send button
 
         sendBtn.disabled = true;
 
 
-        const { error } = await db
-            .from("messages")
+        const {
+            error
+        } = await db
+
+            .from(
+                "private_chat_messages"
+            )
+
             .insert([
                 {
                     sender: currentUser,
@@ -245,7 +318,8 @@ messageForm.addEventListener(
             );
 
             alert(
-                "Message could not be sent."
+                "Message could not be sent.\n\n" +
+                error.message
             );
 
         } else {
@@ -258,23 +332,25 @@ messageForm.addEventListener(
         sendBtn.disabled = false;
 
         messageInput.focus();
+
     }
 );
 
 
-// ================================
-// REAL-TIME MESSAGES
-// ================================
+// ========================================
+// REALTIME CHAT
+// ========================================
 
-db.channel("chat-room")
+db.channel("private-chat-room")
 
     .on(
         "postgres_changes",
         {
             event: "INSERT",
             schema: "public",
-            table: "messages"
+            table: "private_chat_messages"
         },
+
         (payload) => {
 
             // Remove welcome message
@@ -284,27 +360,45 @@ db.channel("chat-room")
                     ".welcome-message"
                 );
 
+
             if (welcome) {
+
                 welcome.remove();
+
             }
 
-            displayMessage(payload.new);
+
+            displayMessage(
+                payload.new
+            );
+
 
             scrollToBottom();
+
         }
     )
 
-    .subscribe();
+    .subscribe(
+        (status) => {
+
+            console.log(
+                "Realtime status:",
+                status
+            );
+
+        }
+    );
 
 
-// ================================
+// ========================================
 // TIME FORMAT
-// ================================
+// ========================================
 
 function formatTime(dateString) {
 
     const date =
         new Date(dateString);
+
 
     return date.toLocaleTimeString(
         [],
@@ -313,23 +407,25 @@ function formatTime(dateString) {
             minute: "2-digit"
         }
     );
+
 }
 
 
-// ================================
-// SCROLL
-// ================================
+// ========================================
+// SCROLL TO BOTTOM
+// ========================================
 
 function scrollToBottom() {
 
     messagesDiv.scrollTop =
         messagesDiv.scrollHeight;
+
 }
 
 
-// ================================
+// ========================================
 // AUTO LOGIN
-// ================================
+// ========================================
 
 if (currentUser) {
 
