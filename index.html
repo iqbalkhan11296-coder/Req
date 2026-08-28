@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>One Little Question ❤️</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+
+        background:
+            radial-gradient(circle at top left, #ffb6c9, transparent 35%),
+            radial-gradient(circle at bottom right, #c8a7ff, transparent 35%),
+            linear-gradient(135deg, #ff758c, #ff7eb3);
+
+        color: white;
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        bottom: -50px;
+        font-size: 20px;
+        opacity: 0.7;
+        animation: floatUp linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0;
+        }
+
+        20% {
+            opacity: 0.8;
+        }
+
+        100% {
+            transform: translateY(-110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    /* Main card */
+    .card {
+        width: min(90%, 450px);
+        padding: 45px 30px;
+        text-align: center;
+
+        background: rgba(255, 255, 255, 0.16);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 30px;
+
+        box-shadow:
+            0 25px 60px rgba(0,0,0,0.2);
+
+        animation: appear 1s ease;
+        z-index: 2;
+    }
+
+    @keyframes appear {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .emoji {
+        font-size: 70px;
+        margin-bottom: 20px;
+        animation: heartbeat 1.5s infinite;
+    }
+
+    @keyframes heartbeat {
+        0%, 100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.12);
+        }
+    }
+
+    h1 {
+        font-size: clamp(28px, 7vw, 42px);
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+
+    .message {
+        font-size: 17px;
+        line-height: 1.6;
+        opacity: 0.95;
+        margin-bottom: 30px;
+    }
+
+    /* Buttons */
+    .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    button {
+        border: none;
+        padding: 14px 28px;
+        border-radius: 50px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease,
+            background 0.25s ease;
+    }
+
+    #yesBtn {
+        background: white;
+        color: #ff4f81;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    #noBtn {
+        background: rgba(255,255,255,0.2);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    button:hover {
+        transform: translateY(-4px) scale(1.04);
+    }
+
+    button:active {
+        transform: scale(0.95);
+    }
+
+    /* Success screen */
+    .success {
+        display: none;
+    }
+
+    .success h1 {
+        font-size: 40px;
+    }
+
+    .success-message {
+        font-size: 18px;
+        line-height: 1.7;
+        margin-top: 15px;
+    }
+
+    .big-heart {
+        font-size: 90px;
+        animation: heartbeat 1s infinite;
+    }
+
+    /* Small screen */
+    @media (max-width: 500px) {
+        .card {
+            padding: 35px 22px;
+        }
+
+        .emoji {
+            font-size: 60px;
+        }
+
+        .buttons {
+            flex-direction: column;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Floating hearts -->
+<div class="heart" style="left:5%; animation-duration:8s;">❤️</div>
+<div class="heart" style="left:15%; animation-duration:11s; animation-delay:2s;">💕</div>
+<div class="heart" style="left:28%; animation-duration:9s; animation-delay:4s;">💗</div>
+<div class="heart" style="left:45%; animation-duration:12s; animation-delay:1s;">❤️</div>
+<div class="heart" style="left:60%; animation-duration:10s; animation-delay:3s;">💖</div>
+<div class="heart" style="left:75%; animation-duration:9s; animation-delay:5s;">💕</div>
+<div class="heart" style="left:90%; animation-duration:13s;">❤️</div>
+
+
+<!-- Question -->
+<div class="card" id="questionCard">
+
+    <div class="emoji">🥺</div>
+
+    <h1>Will you forgive me?</h1>
+
+    <p class="message">
+        I know you're mad at me...<br>
+        But I'm really sorry. ❤️
+    </p>
+
+    <div class="buttons">
+
+        <button id="yesBtn">
+            Yes ❤️
+        </button>
+
+        <button id="noBtn">
+            No 😤
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- Success -->
+<div class="card success" id="successCard">
+
+    <div class="big-heart">❤️</div>
+
+    <h1>I knew it! 🥹</h1>
+
+    <p class="success-message">
+        Thank you for forgiving me. ❤️<br><br>
+        I promise I'll try to make it up to you.
+        <br><br>
+        Now come here 🫂
+    </p>
+
+</div>
+
+
+<script>
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+const questionCard = document.getElementById("questionCard");
+const successCard = document.getElementById("successCard");
+
+
+/* When she clicks NO */
+noBtn.addEventListener("click", function() {
+
+    noBtn.textContent = "Yes ❤️";
+
+    noBtn.style.background = "white";
+    noBtn.style.color = "#ff4f81";
+    noBtn.style.border = "none";
+
+    yesBtn.textContent = "Yes ❤️";
+
+});
+
+
+/* When she clicks YES */
+yesBtn.addEventListener("click", forgive);
+
+noBtn.addEventListener("click", function() {
+
+    if (noBtn.textContent === "Yes ❤️") {
+        noBtn.addEventListener("click", forgive, { once: true });
+    }
+
+});
+
+
+function forgive() {
+
+    questionCard.style.display = "none";
+
+    successCard.style.display = "block";
+
+    createHearts();
+
+}
+
+
+/* Celebration hearts */
+function createHearts() {
+
+    for (let i = 0; i < 25; i++) {
+
+        const heart = document.createElement("div");
+
+        heart.innerHTML = ["❤️","💕","💖","💗","💘"]
+            [Math.floor(Math.random() * 5)];
+
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.bottom = "-30px";
+        heart.style.fontSize =
+            (20 + Math.random() * 25) + "px";
+
+        heart.style.zIndex = "10";
+        heart.style.pointerEvents = "none";
+
+        document.body.appendChild(heart);
+
+        const duration = 3 + Math.random() * 3;
+
+        heart.animate(
+            [
+                {
+                    transform: "translateY(0) scale(1)",
+                    opacity: 1
+                },
+                {
+                    transform:
+                        `translateY(-${window.innerHeight + 100}px) rotate(360deg) scale(1.5)`,
+                    opacity: 0
+                }
+            ],
+            {
+                duration: duration * 1000,
+                easing: "ease-out"
+            }
+        );
+
+        setTimeout(() => {
+            heart.remove();
+        }, duration * 1000);
+    }
+
+}
+
+</script>
+
+</body>
+</html>
